@@ -1,4 +1,4 @@
-def permutations(array)
+def permutations(array, index = 0, result = [])
   # Write a method that takes in an array of integers and returns an array of
   # all possible permutations of the original array. The permutations of a set
   # are the different ways the elements can be arranged.
@@ -13,5 +13,12 @@ def permutations(array)
   #
   # NOTE: the tests do not check for ordering, so a return of `[[1, 2], [2, 1]]`
   # will be treated the same as `[[2, 1], [1, 2]]`
-  
+  return result << array.clone if index == array.length 
+
+  (index...array.length).each do |i|
+    array[index], array[i] = array[i], array[index]
+    permutations(array, index + 1, result)
+    array[index], array[i] = array[i], array[index]
+  end
+  result
 end
