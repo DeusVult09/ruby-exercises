@@ -20,8 +20,19 @@ def pascal(row_number)
   new_row = []
 
   prev = pascal(row_number - 1)
-  (0...prev.length).each do |n|
-  new_row << ([0] + prev).merge(prev[n] + prev[n+1] + prev[-1] + 0)
+  (0..prev.length).each do |i|
+    if i == 0 
+      left_neighbor = 0
+    else 
+      left_neighbor = prev[i-1]
+    end 
+    if i == prev.length
+      right_neighbor = 0
+    else
+      right_neighbor = prev[i]
+    end
+    new_row << left_neighbor + right_neighbor
   end
-  curr_row
+  new_row
 end
+pascal(3)
